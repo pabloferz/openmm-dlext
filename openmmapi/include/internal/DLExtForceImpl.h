@@ -32,10 +32,10 @@ public:
     );
     std::map<std::string, double> getDefaultParameters();
     std::vector<std::string> getKernelNames();
-    void setCallback(Function<void>& f);
+    void setCallback(Function<void, long long>& f);
 private:
     const OpenMM::Force& owner;
-    Function<void> callback = []() { };
+    Function<void, long long> callback = [](long long) { };
 };
 
 
