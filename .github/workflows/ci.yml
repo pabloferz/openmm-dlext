@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - citest
     paths-ignore:
       - '**.md'
   # Allows you to run this workflow manually from the Actions tab
@@ -17,15 +18,8 @@ jobs:
       - name: Check Out Repo
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Pull image from Docker Hub
-        run: docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/pysages-base:latest
-
       - name: Build the Plugin
-        run: |
-          docker run -t pysages-base bash -c "mkdir build && cd build && cmake .. && make install"
+        uses: docker://ssages/pysages-base:lastest
+        with:
+          entrypoint: python
+          args: "-c 'import hoomd; print(hoomd.__version__)'"
