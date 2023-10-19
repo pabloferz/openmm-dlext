@@ -70,7 +70,7 @@ if(OpenMM_FOUND AND NOT TARGET OpenMM::OpenMM)
         "${OpenMM_INCLUDE_DIR}/openmm/reference"
     )
     target_link_libraries(OpenMM::OpenMM INTERFACE
-        ${OpenMM_LIBRARY} ${OpenMM_CPU_LIBRARY}
+        ${OpenMM_LIBRARY} #${OpenMM_CPU_LIBRARY}
     )
 
     if(OpenMM_CUDA_LIBRARY)
@@ -89,9 +89,9 @@ if(OpenMM_FOUND AND NOT TARGET OpenMM::OpenMM)
             target_include_directories(OpenMM::OpenMM INTERFACE
                 "${OpenMM_INCLUDE_DIR}/openmm/cuda"
             )
-            target_link_libraries(OpenMM::OpenMM INTERFACE
-                ${OpenMM_CUDA_LIBRARY}
-            )
+            #target_link_libraries(OpenMM::OpenMM INTERFACE
+            #    ${OpenMM_CUDA_LIBRARY}
+            #)
         endif()
     endif(OpenMM_CUDA_LIBRARY)
 endif()
